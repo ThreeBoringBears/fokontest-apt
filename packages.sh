@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-mkdir packages_dir
+[[ -d packages_dir ]] || mkdir packages_dir
 
 radical='testexo'
 for i in {1..4}; do
-  if [[  -f "packages_dir/${radical}${i}.deb" ]] && continue
+  [[  -f "packages_dir/${radical}${i}.deb" ]] && continue
   mkdir -p ${radical}${i}/DEBIAN/
   cat > ${radical}${i}/DEBIAN/control <<EOF
 Package: ${radical}${i}
