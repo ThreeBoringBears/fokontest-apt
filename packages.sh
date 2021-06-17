@@ -1,5 +1,9 @@
+#!/usr/bin/env bash
+mkdir packages_dir
+
 radical='testexo'
 for i in {1..4}; do
+  if [[  -f "packages_dir/${radical}${i}.deb" ]] && continue
   mkdir -p ${radical}${i}/DEBIAN/
   cat > ${radical}${i}/DEBIAN/control <<EOF
 Package: ${radical}${i}
@@ -14,6 +18,6 @@ Description: Learning package
 EOF
 
 dpkg-deb --build ${radical}${i}
-
+mv ${radical}${i}.deb packages_dir/
 rm -rf ${radical}${i}/
 done
